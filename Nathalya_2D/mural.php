@@ -6,7 +6,7 @@ if(isset($_POST['cadastra'])){
     $email = mysqli_real_escape_string($conexao, $_POST['email']);
     $msg = mysqli_real_escape_string($conexao, $_POST['msg']);
 
-    $sql = "INSERT INTO recados (nome, email, mensagem) VALUES ('$nome', '$email', '$msg')";
+    $sql = "INSERT INTO recado (nome, email, mensagem) VALUES ('$nome', '$email', '$msg')";
     mysqli_query($conexao, $sql) or die("Ero ao inserir dados: " . mysqli_error($conexao));
     header("Location: mural.php");
     exit;
@@ -18,7 +18,7 @@ if(isset($_POST['cadastra'])){
 <head>
 <meta charset="utf-8"/>
 <title>Mural de pedidos</title>
-<link rel="stylesheet" href="style.css/>
+<link rel="stylesheet" href="style.css"/>
 
 <script src="scripts/jquery.js"></script>
 <script src="scripts/jquery.validate.js"></script>
@@ -60,9 +60,9 @@ $(document).ready(function() {
 </div>
 
 <?php
-$seleciona = mysqli_query($conexao, "SELECT * FROM recados ORDER BY id DESC");
+$seleciona = mysqli_query($conexao, "SELECT * FROM recado ORDER BY id DESC");
 while($res = mysqli_fetch_assoc($seleciona)){
-    echo '<ul class="recados">';
+    echo '<ul class="recado">';
     echo '<li><strong>ID:</strong> ' . $res['id'] . '</li>';
     echo '<li><strong>Nome:</strong> ' . htmlspecialchars($res['nome']) . '</li>';
     echo '<li><strong>Email:</strong> ' . htmlspecialchars($res['email']) . '</li>';
@@ -76,4 +76,95 @@ while($res = mysqli_fetch_assoc($seleciona)){
 </div>
 </div>
 </body>
+<style>
+body {
+    background-image: url('https://i.pinimg.com/originals/0c/69/1c/0c691c22d44fa88809791e21069a502f.png');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    padding: 30px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 2em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 15px;
+    resize: vertical;
+}
+
+button,
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.error-message {
+    background-color: #fce7e7;
+    color: #c0392b;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    box-shadow: 0 1px 5px rgba(192, 57, 43, 0.1);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+}
+</style>
 </html>
